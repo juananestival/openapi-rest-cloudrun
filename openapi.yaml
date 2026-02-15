@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Google Store Product API
+  description: A REST API for querying mock Google Store products.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /products:
+    get:
+      summary: List Products
+      description: Retrieves a list of products from the Google Store, optionally filtered by category or a search query.
+      operationId: get_products_products_get
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            nullable: true
+          description: The category of products to filter by (e.g., "phones", "earbuds", "smarthome")
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+            nullable: true
+          description: A keyword or phrase to search for within product names or descriptions
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: float
+        currency:
+          type: string
+        specs:
+          type: array
+          items:
+            type: string
+        features:
+          type: array
+          items:
+            type: string
+        colors:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - category
+        - name
+        - description
+        - price
+        - currency
+    ProductResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        message:
+          type: string
+      required:
+        - products

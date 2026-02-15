@@ -1,0 +1,26 @@
+### Global Variables
+@baseUrl = http://localhost:8080
+
+### Get Root
+GET {{baseUrl}}/
+Accept: application/json
+
+### Get All Products
+GET {{baseUrl}}/products
+Accept: application/json
+
+### Filter by Category (Phones)
+GET {{baseUrl}}/products?category=phones
+Accept: application/json
+
+### Search for "Pixel"
+GET {{baseUrl}}/products?q=Pixel
+Accept: application/json
+
+### Search with no results
+GET {{baseUrl}}/products?q=nonexistentproduct
+Accept: application/json
+
+### Filter by Category (Smarthome)
+GET {{baseUrl}}/products?category=smarthome
+Accept: application/json
